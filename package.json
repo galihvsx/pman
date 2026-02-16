@@ -17,9 +17,10 @@
   ],
   "scripts": {
     "dev": "bun --hot example/index.ts",
-    "build": "bun build src/index.ts --outdir dist --target node --format esm && tsc --emitDeclarationOnly --declaration dist/index.d.ts",
+    "build": "bun build src/index.ts --outdir dist --target node --format esm && tsc --emitDeclarationOnly",
     "prepublishOnly": "bun run build",
-    "test": "bun test"
+    "test": "bun test",
+    "version": "auto-changelog -p && git add CHANGELOG.md"
   },
   "keywords": [
     "whatsapp",

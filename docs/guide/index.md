@@ -1,81 +1,88 @@
-# Pengenalan p-man
+# p-man Guides
 
-p-man adalah framework WhatsApp bot yang dibangun di atas [whatsapp-web.js](https://github.com/pedroslopez/whatsapp-web.js). Framework ini menyediakan arsitektur yang modular dan extensible untuk membangun bot WhatsApp dengan mudah.
+Welcome to the p-man documentation! This framework helps you build modular WhatsApp bots easily.
 
-## Fitur Utama
+## Choose Your Language / Pilih Bahasa
 
-- **Command System**: Sistem perintah yang fleksibel dengan dukungan decorator dan class-based
-- **Listener System**: Event listener untuk berbagai event WhatsApp
-- **Plugin System**: Arsitektur plugin untuk meng-extend fungsionalitas
-- **Prefix Support**: Mendukung satu atau beberapa prefix
-- **Mention Support**: Opsional trigger via mention bot
-- **Built on Bun**: Mengoptimalkan performa dengan runtime Bun
-
-## Konsep Dasar
-
-p-man terdiri dari tiga komponen utama:
-
-| Komponen | Deskripsi |
-|----------|-----------|
-| **Command** | Handler untuk perintah yang dipanggil user (misal: `.ping`, `.help`) |
-| **Listener** | Event listener untuk berbagai event WhatsApp (`message_create`, `ready`, dll) |
-| **Plugin** | Modul terpisah untuk mengelompokkan command dan listener |
-
-## Instalasi
-
-```bash
-bun install
-```
+| 🇬🇧 English | 🇮🇩 Bahasa Indonesia |
+|-------------|----------------------|
+| [English Guides](./en/) | [Panduan Bahasa Indonesia](./id/) |
 
 ## Quick Start
 
-```typescript
-import { PmanClient, Command, Plugin, Listener } from "pman";
+### Installation
 
-// Buat client
+```bash
+bun add @galihz/pman whatsapp-web.js
+```
+
+Or with npm/yarn:
+
+```bash
+npm install @galihz/pman whatsapp-web.js
+```
+
+### Basic Usage
+
+```typescript
+import { PmanClient, Command, type CommandContext } from "@galihz/pman";
+import { LocalAuth } from "whatsapp-web.js";
+
 const client = new PmanClient({
-    prefix: ".",
-    authStrategy: new LocalAuth({}),
+    prefix: "!",
+    authStrategy: new LocalAuth(),
     puppeteer: { headless: true }
 });
 
-// Register command
-client.commands.register(new MyCommand());
+class PingCommand extends Command {
+    constructor() {
+        super({ name: "ping", description: "Test connection" });
+    }
 
-// Register listener
-client.listenerStore.register(new MyListener());
+    override async run(context: CommandContext) {
+        await context.reply("Pong! 🏓");
+    }
+}
 
-// Register plugin
-client.plugins.register(new MyPlugin());
-
-// Initialize
+client.commands.register(new PingCommand());
 client.initialize();
 ```
 
-## Struktur Project
+## Full Documentation
 
-```
-pman/
-├── src/
-│   └── lib/
-│       ├── PmanClient.ts
-│       ├── decorators/
-│       ├── handlers/
-│       ├── stores/
-│       └── structures/
-├── example/
-│   ├── commands/
-│   ├── listeners/
-│   ├── plugins/
-│   └── index.ts
-└── docs/
-    └── guide/
-```
+### English (Primary)
 
-## Lanjut ke Tutorial
+- [Introduction](./en/introduction.md) - About p-man
+- [Setup](./en/setup.md) - Setup from scratch
+- [Commands](./en/commands.md) - Create commands
+- [Listeners](./en/listeners.md) - Event listeners
+- [Plugins](./en/plugins.md) - Plugin system
+- [API Reference](./en/api.md) - Complete API reference
+- [Recipes](./en/recipes.md) - Example bots
 
-- [Setup Project](./setup.md) - Setup project p-man dari awal
-- [Commands](./commands.md) - Membuat dan mengelola command
-- [Listeners](./listeners.md) - Menggunakan event listeners
-- [Plugins](./plugins.md) - Membuat plugin terpisah
-- [API Reference](./api.md) - Referensi API lengkap
+### Bahasa Indonesia
+
+- [Pengenalan](./id/index.md) - Tentang p-man
+- [Setup Project](./id/setup.md) - Setup dari awal
+- [Commands](./id/commands.md) - Membuat commands
+- [Listeners](./id/listeners.md) - Event listeners
+- [Plugins](./id/plugins.md) - Plugin system
+- [API Reference](./id/api.md) - Referensi API lengkap
+- [Recipes](./id/recipes.md) - Contoh-contoh bot
+
+## Key Features
+
+- ✨ **Command System** - Flexible command system with decorators and classes
+- 🎧 **Listener System** - Event listeners for various WhatsApp events
+- 🔌 **Plugin System** - Modular plugin architecture
+- 🎯 **Prefix Support** - Support single or multiple prefixes
+- 📱 **Mention Support** - Trigger commands via bot mention
+- ⚡ **Bun Powered** - Optimized performance with Bun runtime
+- 📝 **TypeScript Full** - Type safety with TypeScript
+- 🧩 **Extensible** - Easy to customize and extend
+
+## Support
+
+- 📖 [Documentation](./en/)
+- 🐛 [Issues](https://github.com/galihz/pman/issues)
+- 💬 [Discussions](https://github.com/galihz/pman/discussions)
