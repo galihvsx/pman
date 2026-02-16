@@ -1,7 +1,14 @@
 import { Plugin } from "../structures/Plugin";
 
+import { PmanClient } from "../PmanClient";
+
 export class PluginStore {
   private plugins = new Map<string, Plugin>();
+  public client: PmanClient;
+
+  constructor(client: PmanClient) {
+    this.client = client;
+  }
 
   register(plugin: Plugin): void {
     this.plugins.set(plugin.name, plugin);
