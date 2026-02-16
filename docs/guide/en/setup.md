@@ -20,7 +20,7 @@ bun init -y
 ## Install Dependencies
 
 ```bash
-bun add @galihz/pman whatsapp-web.js
+bun add @galihvsx/pman whatsapp-web.js
 bun add -d @types/bun @types/qrcode-terminal typescript
 ```
 
