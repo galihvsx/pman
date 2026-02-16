@@ -1,22 +1,63 @@
 {
-    "name": "pman",
-    "module": "index.ts",
-    "type": "module",
-    "private": true,
-    "scripts": {
-        "dev": "bun --hot index.ts"
-    },
-    "devDependencies": {
-        "@types/bun": "latest",
-        "@types/qrcode-terminal": "^0.12.2"
-    },
-    "peerDependencies": {
-        "typescript": "^5"
-    },
-    "dependencies": {
-        "qrcode-terminal": "^0.12.0",
-        "reflect-metadata": "^0.2.2",
-        "uuid": "^13.0.0",
-        "whatsapp-web.js": "^1.34.6"
+  "name": "@galihz/pman",
+  "version": "0.1.0",
+  "description": "Modular WhatsApp bot framework built on whatsapp-web.js with Bun runtime",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
     }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "bun --hot example/index.ts",
+    "build": "bun build src/index.ts --outdir dist --target node --format esm && tsc --emitDeclarationOnly --declaration dist/index.d.ts",
+    "prepublishOnly": "bun run build",
+    "test": "bun test"
+  },
+  "keywords": [
+    "whatsapp",
+    "bot",
+    "whatsapp-web.js",
+    "whatsapp-bot",
+    "chatbot",
+    "wabot",
+    "bun",
+    "framework",
+    "p-man"
+  ],
+  "author": "galihz",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/galihz/pman.git"
+  },
+  "bugs": {
+    "url": "https://github.com/galihz/pman/issues"
+  },
+  "homepage": "https://github.com/galihz/pman#readme",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "peerDependencies": {
+    "whatsapp-web.js": "^1.34.6"
+  },
+  "dependencies": {
+    "reflect-metadata": "^0.2.2"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/qrcode-terminal": "^0.12.2",
+    "typescript": "^5.0.0"
+  },
+  "optionalDependencies": {
+    "qrcode-terminal": "^0.12.0",
+    "uuid": "^13.0.0"
+  }
 }
